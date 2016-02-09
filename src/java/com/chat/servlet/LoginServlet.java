@@ -74,7 +74,7 @@ public class LoginServlet extends HttpServlet {
             if (password != null){
                 if(password.equals(user.getPassword())){
                     //SUCCESS
-                    request.getSession().setAttribute("user", user);
+                    request.getSession().setAttribute("username", user);
                     response.sendRedirect("index.jsp");
                     return;
                 }

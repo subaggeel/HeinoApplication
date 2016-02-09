@@ -23,6 +23,7 @@ public class UserDAO {
         USERS.put("minhhoang308", new User("minhhoang", "123", "Vo Minh Hoang Test 2"));
     }
     
+    
     public static User getUser(String username){
         return USERS.get(username);
     }
