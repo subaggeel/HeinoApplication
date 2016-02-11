@@ -26,6 +26,19 @@ and open the template in the editor.
 
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script type="text/javascript"> 
+            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
+            websocket.onmessage = function processMessage(message){
+                var jsonData = JSON.parse(message.data);
+                if(jsonData.message !== null) messagesTextArea.value += jsonData.message + "\n";
+            };
+            
+            function sendMessage(){
+                websocket.send(messageText.value);
+                messageText.value = "";
+            }
+            
+        </script>
     </head>
     <body onload="displayDate()">
 
@@ -171,14 +184,14 @@ and open the template in the editor.
                                 </ul>
                             </div>
                         </div><!-- Tänne tulee viestit-->
-                        <div class="panel-body chat-box-main" >
+                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>>
 
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="in">
+                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="messageText">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-info" type="button">SEND</button>
+                                    <button class="btn btn-info" type="button" onclick="sendMessage();">SEND</button>
                                 </span>
                             </div>
                         </div>
