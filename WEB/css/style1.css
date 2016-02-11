@@ -12,18 +12,32 @@ and open the template in the editor.
 /*======================================
     GENERAL STYLES
 ======================================= */
+#button3{
+    margin-bottom:25px;
+    margin-left:30px;
+}
+#button4{
+    margin-bottom:25px;
+    margin-left:5px;
+
+}
+
+#search{
+    width:200px;
+    
+}
 #users{
 background:#FAF7F5;
 }
 ul li a{
 
 }
-#detail{
+#chat{
 background:#FAF7F5;
 }
 #tab{
 
-background:#03DB2F;
+background:#00b0b3;
 }
 #serc{
 margin-left:400px;
@@ -32,6 +46,14 @@ body {
    font-family:Verdana;
 
 
+}
+#but1{
+    margin-left:100px;
+    
+}
+but2{
+   margin-left:100px; 
+    
 }
 #tab{
 display:block;
@@ -62,7 +84,7 @@ margin-bottom:0 px;
 .chat-box-head {
     padding: 10px 15px;
 border-bottom: 1px solid #03DB2F;
-background-color:  #03DB2F;
+background-color:  #00b0b3;
 color: #fff;
 text-align: center;
 
@@ -167,7 +189,7 @@ padding: 10px;
 .chat-box-online-head {
     padding: 10px 15px;
 border-bottom: 2px solid #03DB2F;
-background-color: #03DB2F;
+background-color: #00b0b3;
 color: #fff;
 text-align: center;
 
@@ -196,22 +218,23 @@ text-align: center;
     }
 
     /*======================================
-  NEW  CHAT  STYLES
+  NEW  Details box
 ======================================= */
 
 .chat-box-new {
-     height:554px;
+     height:300px;
     overflow:auto;
 }
 .chat-box-new-div {
     border:1px solid #03DB2F;
     border-bottom:1px solid #03DB2F;
+    
 } 
 
 .chat-box-new-head {
     padding: 10px 15px;
 border-bottom: 2px solid #03DB2F;
-background-color: #03DB2F;
+background-color: #00b0b3;
 color: #fff;
 text-align: center;
 

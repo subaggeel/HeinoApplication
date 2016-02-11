@@ -36,9 +36,9 @@ and open the template in the editor.
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="tab">
                     <li class="active"><a href="#users" aria-controls="users"  data-toggle="collapse" >Home</a></li>
-                    <li ><a href="#profile" aria-controls="profile" role="tab"  ><span class="glyphicon glyphicon-user" style="color:black">Profile</span></a></li>
-                    <li ><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-users" style="color:black">Groups</span></a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-log-out-sign-out" style="color:black">Logout</span></a></li>
+                    <li ><a href="#profile" aria-controls="profile" role="tab"  ><span class="glyphicon glyphicon-user" style="color:white">Profile</span></a></li>
+                    <li ><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-users" style="color:white">Groups</span></a></li>
+                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-log-out-sign-out" style="color:white">Logout</span></a></li>
                     <li role="presentation">
                         <div class="form-group center" id="serc">
                             <form action="">
@@ -59,23 +59,23 @@ and open the template in the editor.
 
 
 
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class="col-lg-4 col-md-4 col-sm-4">
                     <div class="chat-box-online-div">
                         <div class="chat-box-online-head">
 
-                            USERS
-                            <div class="btn-group pull-right">
-                                <button class=" btn btn-primary">
-                                    <span class="glyphicon glyphicon-plus-sign"></span>
-                                </button>
-                            </div>
+                
+                           <div class="input-group">
+      <input type="text" class="form-control" placeholder="Search for...">
+      <span class="input-group-btn">
+          <span class="glyphicon glyphicon-search" ><button class="btn btn-info" type="button" id="button4">Go!</button></span>
+      </span> <button class="btn btn-info" type="button" id="button3"><span class="glyphicon glyphicon-plus-sign"></span></button>
+
+    </div>
+                            
                         </div>
                         <div class="panel-body chat-box-online" id="users">
 
-                            <div class="form-group">
-                                <label for="query"></label>
-                                <input type="text" class="form-control" name="search" id="search" placeholder="Search users">              
-                            </div>
+                            
                             <hr class="hr-clas-low">
                             <div class="chat-box-online-head">
                                 Recent Chats
@@ -155,9 +155,7 @@ and open the template in the editor.
                         <div class="chat-box-head">
                             GROUP CHAT HISTORY
                             <div class="btn-group pull-right">
-                                <button class=" btn btn-primary">
-                                    <span class="glyphicon glyphicon-user"></span>
-                                </button>
+                                
                                 <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" >
                                     <span class="glyphicon glyphicon-cog"></span>
                                     <span class="sr-only">Toggle Dropdown</span>
@@ -170,6 +168,12 @@ and open the template in the editor.
                                     
                                 </ul>
                             </div>
+                            <div class="btn-group" id="but1">
+                                
+                                <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-user"></span></button>
+
+                            </div>
+                            
                         </div><!-- Tänne tulee viestit-->
                         <div class="panel-body chat-box-main" >
 
@@ -186,7 +190,7 @@ and open the template in the editor.
                     </div>
 
                 </div>
-                <div class="col-lg-4 col-md-4 col-sm-4" id="demo1">
+                <div class="col-lg-4 col-md-4 col-sm-4" >
                     <div class="chat-box-new-div">
                         <div class="chat-box-new-head">
                             Details
@@ -194,13 +198,13 @@ and open the template in the editor.
                         <div class="panel-body chat-box-new" id="chat" >
 
                             
-                            <div>
+                            
+                        </div>
+                        <div>
                           <hr class="hr-class-low" />
 
                             <button class="btn btn-info pull-right" type="button" ><span class="glyphicon glyphicon-phone">Call</span></button>  
                             </div>
-                        </div>
-                        
 
                     </div>
 
