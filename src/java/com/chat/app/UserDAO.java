@@ -20,7 +20,7 @@ public class UserDAO {
     
     static {
         USERS.put("minhhoang308", new User("minhhoang308", "123", "Vo Minh Hoang"));
-        USERS.put("minhhoang308", new User("minhhoang", "123", "Vo Minh Hoang Test 2"));
+        USERS.put("minhhoang308", new User("minhhoang", "m123", "Vo Minh Hoang Test 2"));
     }
     
     
