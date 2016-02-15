@@ -4,6 +4,7 @@
     Author     : parkkpau1
 --%>
 
+<%@page import="com.chat.app.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -43,6 +44,20 @@
         </script>
     </head>
     <body onload="displayDate()">
+<%
+//Check that session exists for user!
+String userName = null;
+if(session.getAttribute("user") == null){
+    response.sendRedirect("login.jsp");
+}else {
+    User usr;    
+    usr = (User) session.getAttribute("user");
+    userName = usr.getFullName();
+}
+%>
+<h3>Welcome <%=userName %> </h3>
+<br>
+
 
 
         <div class="container-fluid">

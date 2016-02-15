@@ -5,6 +5,8 @@
  */
 package com.chat.login;
 
+import com.chat.app.User;
+import com.chat.app.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,6 +15,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  *
@@ -62,9 +65,14 @@ public class LoginServlet extends HttpServlet {
                 String user = request.getParameter("username");
                 String pass = request.getParameter("password");
         
-        if(user.equals("user") && pass.equals("123"))
+        if(validateUser(user, pass))
         {
-             response.sendRedirect("main.jsp"); //logged-in page 
+            HttpSession session = request.getSession();
+            session.setAttribute("user", UserDAO.getUser(user)); //TODO: fix return values, dublicate user call...
+            session.setMaxInactiveInterval(30*60);
+            //EncodedURL incase cookies are not used (JSESSIONID)
+            String encodedURL = response.encodeRedirectURL("main.jsp");
+            response.sendRedirect(encodedURL);
         }
         else
         {
@@ -72,6 +80,11 @@ public class LoginServlet extends HttpServlet {
         }
     }
 
+    private boolean validateUser(String username, String password) {
+        //NOTE!! Functionality needed for user search from User store. Using only userDao as temporary solution.
+        User usr = UserDAO.getUser(username);
+        return usr != null && usr.getPassword().equals(password);
+    }
 
      /**
      * Handles the HTTP <code>POST</code> method.
