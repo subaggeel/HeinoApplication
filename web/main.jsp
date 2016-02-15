@@ -65,15 +65,10 @@ if(session.getAttribute("user") == null){
 
         <div class="container-fluid">
             <div>
-
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="tab">
 
                 </ul>
-                
-
-
-
             </div>
 
             <div class="row pad-top pad-bottom">
