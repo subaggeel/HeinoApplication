@@ -19,6 +19,8 @@
         <title>ChatApp</title>
         <!-- BOOTSTRAP CORE STYLE CSS -->
         <link href="css/bootstrap.css" rel="stylesheet" />
+            <!-- Bootstrap core CSS -->
+        <link href="css/bootstrap.min.css" rel="stylesheet">
         <!-- FONT AWESOME  CSS -->
         <link href="css/font-awesome.css" rel="stylesheet" />
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
@@ -56,8 +58,9 @@ if(session.getAttribute("user") == null){
 }
 %>
 <h3>Welcome <%=userName %> </h3>
-<br>
 
+ <form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
+ <button class="btn btn-info btn-logout" type="submit" value="Logout" >Log out</button></form>
 
 
         <div class="container-fluid">
@@ -65,12 +68,6 @@ if(session.getAttribute("user") == null){
 
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs" role="tablist" id="tab">
-                    <li class="active"><a href="#users" aria-controls="users"  data-toggle="collapse" >Home</a></li>
-                    <li ><a href="#profile" aria-controls="profile" role="tab"  ><span class="glyphicon glyphicon-user" style="color:black">Profile</span></a></li>
-                    <li ><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-users" style="color:black">Groups</span></a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-log-out-sign-out" style="color:black">Logout</span></a></li>
-                    <li role="presentation">
-                    </li>
 
                 </ul>
                 
