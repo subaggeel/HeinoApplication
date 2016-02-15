@@ -3,26 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package com.chat.servlet;
+package com.chat.login;
 
-import com.chat.app.User;
-import com.chat.app.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 /**
  *
- * @author apple
+ * @author parkkpau1
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
 public class LoginServlet extends HttpServlet {
-
+ 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -61,37 +59,39 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-          
-        processRequest(request, response);
-
+                String user = request.getParameter("username");
+                String pass = request.getParameter("password");
         
-    }
-
-    @Override
-    protected void doPost(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
-         String username = request.getParameter("username");
-        String password = request.getParameter("password");
-        
-        User user = UserDAO.getUser(username);
-        if (user  != null){
-            if (password != null){
-                if(password.equals(user.getPassword())){
-                    //SUCCESS
-                    HttpSession session = request.getSession(true); 
-                    session.setAttribute("username",user); 
-                    response.sendRedirect("index.jsp");
-                    return;
-                }
-            }
-            response.sendRedirect("loginFail.jsp");
+        if(user.equals("user") && pass.equals("123"))
+        {
+             response.sendRedirect("main.jsp"); //logged-in page 
         }
-        response.sendRedirect("loginFail.jsp");
-       
-        
+        else
+        {
+           response.sendRedirect("loginfail.jsp"); //logged-in page 
+        }
     }
 
 
+     /**
+     * Handles the HTTP <code>POST</code> method.
+     *
+     * @param request servlet request
+     * @param response servlet response
+     * @throws ServletException if a servlet-specific error occurs
+     * @throws IOException if an I/O error occurs
+     */
+    @Override
+        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        super.doPost(request, response);
+    } 
+
+    /**
+     * Returns a short description of the servlet.
+     *
+     * @return a String containing servlet description
+     */
     @Override
     public String getServletInfo() {
         return "Short description";
