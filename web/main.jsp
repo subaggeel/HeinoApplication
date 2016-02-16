@@ -32,16 +32,30 @@
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript"> 
-            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
+            var websocket = new WebSocket("ws://localhost:8080/webprojectEnhance/chatroomServerEndpoint");
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
-                if(jsonData.message !== null) messageTextArea.value += jsonData.message + "\n";
-            };
-            
+                if(jsonData.message != null){
+                	messagesTextArea.value += jsonData.message + " \n";                	
+                }
+                if(jsonData.users != null){
+                    usersTextArea.value="";
+                    var i = 0;
+                    while (i<jsonData.users.length){
+                        usersTextArea.value += jsonData.users[i++] + " \n";
+                    }
+                }   
+            }
+                        
             function sendMessage(){
                 websocket.send(messageText.value);
                 messageText.value = "";
             }
+            
+            window.onbeforeunload = function(){
+                websocket.onclose = function(){};
+                websocket.close()
+            };
             
         </script>
     </head>
@@ -109,7 +123,8 @@ if(session.getAttribute("user") == null){
                             GROUP CHAT HISTORY
                         </div><!-- Tänne tulee viestit-->
 <!--                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>-->
-                        <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"> </textarea><br/>
+                            <textarea id="messagesTextArea" readonly="readonly" rows="10" cols="45"> </textarea>
+                            <textarea id="usersTextArea" readonly="readonly" rows="10" cols="3"> </textarea><br/>
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
