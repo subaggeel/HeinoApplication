@@ -19,13 +19,15 @@ public class UserDAO {
     static HashMap<String, User> USERS = new HashMap<String, User>();
     
     static {
-        USERS.put("minhhoang308", new User("minhhoang308", "123", "Vo Minh Hoang"));
-        USERS.put("minhhoang308", new User("minhhoang", "m123", "Vo Minh Hoang Test 2"));
+        USERS.put("user", new User("user", "123", "Ms Test User"));
+        USERS.put("user2", new User("user2", "123", "Mr Test User 2"));
     }
     
     
     public static User getUser(String username){
         return USERS.get(username);
     }
+    
+
 }
 

@@ -12,4 +12,11 @@ and open the template in the editor.
     overflow:auto;
 }
 
+h3 {
+    margin: 10px;
+}
+
+.btn-logout {
+    margin: 10px;
+}
 

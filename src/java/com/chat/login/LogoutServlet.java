@@ -5,13 +5,11 @@
  */
 package com.chat.login;
 
-import com.chat.app.User;
-import com.chat.app.UserDAO;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -21,9 +19,9 @@ import javax.servlet.http.HttpSession;
  *
  * @author parkkpau1
  */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/LoginServlet"})
-public class LoginServlet extends HttpServlet {
- 
+@WebServlet(name = "LogoutServlet", urlPatterns = {"/LogoutServlet"})
+public class LogoutServlet extends HttpServlet {
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,10 +39,10 @@ public class LoginServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet LoginServlet</title>");            
+            out.println("<title>Servlet LogoutServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LogoutServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -62,31 +60,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-                String user = request.getParameter("username");
-                String pass = request.getParameter("password");
-        
-        if(validateUser(user, pass))
-        {
-            HttpSession session = request.getSession();
-            session.setAttribute("user", UserDAO.getUser(user)); //TODO: fix return values, dublicate user call...
-            session.setMaxInactiveInterval(30*60);
-            //EncodedURL incase cookies are not used (JSESSIONID)
-            String encodedURL = response.encodeRedirectURL("main.jsp");
-            response.sendRedirect(encodedURL);
-        }
-        else
-        {
-           response.sendRedirect("loginfail.jsp"); //logged-in page 
-        }
+        processRequest(request, response);
     }
 
-    private boolean validateUser(String username, String password) {
-        //NOTE!! Functionality needed for user search from User store. Using only userDao as temporary solution.
-        User usr = UserDAO.getUser(username);
-        return usr != null && usr.getPassword().equals(password);
-    }
-
-     /**
+    /**
      * Handles the HTTP <code>POST</code> method.
      *
      * @param request servlet request
@@ -95,10 +72,23 @@ public class LoginServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     @Override
-        protected void doPost(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        super.doPost(request, response);
-    } 
+        response.setContentType("text/html");
+        Cookie[] cookies = request.getCookies();
+        //Remove possible cookies
+        if(cookies != null){
+        for(Cookie cookie : cookies){
+            cookie.setMaxAge(0);
+            response.addCookie(cookie);
+            }
+        }       
+        HttpSession session = request.getSession(false); //parameter: false - do not create and return new session
+        if(session != null){
+            session.invalidate(); //invalidate the session
+        }
+        response.sendRedirect("login.jsp");
+    }
 
     /**
      * Returns a short description of the servlet.
