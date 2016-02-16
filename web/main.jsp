@@ -35,7 +35,7 @@
             var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
-                if(jsonData.message !== null) messagesTextArea.value += jsonData.message + "\n";
+                if(jsonData.message !== null) messageTextArea.value += jsonData.message + "\n";
             };
             
             function sendMessage(){
@@ -108,12 +108,12 @@ if(session.getAttribute("user") == null){
                         <div class="chat-box-head">
                             GROUP CHAT HISTORY
                         </div><!-- Tänne tulee viestit-->
-                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>
-
+<!--                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>-->
+                        <textarea id="messageTextArea" readonly="readonly" rows="10" cols="45"> </textarea><br/>
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="messageText">
+                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="messageText" onkeypress="if (event.keyCode==13){sendMessage();}">
                                 <span class="input-group-btn">
                                     <button class="btn btn-info" type="button" onclick="sendMessage();">SEND</button>
                                 </span>
