@@ -8,7 +8,6 @@ package com.chat.websocket;
 
 import java.io.IOException;
 import java.io.StringWriter;
-import java.math.BigDecimal;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -27,7 +26,7 @@ import javax.json.JsonWriter;
  *
  * @author apple
  */
-@ServerEndpoint("/chatroomServerEndpoint")
+@ServerEndpoint(value = "/chatroomServerEndpoint", encoders={ChatMessageEncoder.class}, decoders={ChatMessageDecoder.class})
 public class ChatroomServerEndpoint {
     static Set<Session> chatroomUsers = Collections.synchronizedSet(new HashSet<Session>());
     @OnOpen
@@ -74,7 +73,7 @@ public class ChatroomServerEndpoint {
     }
     
     private Set<String> getUserNames(){
-        HashSet<String> returnSet = new HashSet<String>();
+        HashSet<String> returnSet = new HashSet<>();
         Iterator<Session> iterator = chatroomUsers.iterator();
         while(iterator.hasNext()){
             returnSet.add(iterator.next().getUserProperties().get("username").toString());
