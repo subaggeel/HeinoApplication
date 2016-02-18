@@ -19,8 +19,9 @@ public class UserDAO {
     static HashMap<String, User> USERS = new HashMap<String, User>();
     
     static {
-        USERS.put("user", new User("user", "123", "Ms Test User"));
-        USERS.put("user2", new User("user2", "123", "Mr Test User 2"));
+        USERS.put("pauliina", new User("pauliina", "123", "Ms.Ninja Paupi Parkkinen"));
+        USERS.put("abdi", new User("abdi", "123", "Mr.Mohammed Cabdi"));
+        USERS.put("minhvo", new User("minhvo", "123", "Mr.Minh Hoang VO"));
     }
     
     

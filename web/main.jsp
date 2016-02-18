@@ -104,11 +104,7 @@ if(session.getAttribute("user") == null){
                             </div>
                             <hr class="hr-clas-low">
 
-                            <div class="chat-box-online-left" id="us" onclick="pres3()" >
-                              Hanna Salminen
-                                <br />
-                                ( <small>Active from 3 hours</small> )
-                            </div>
+                            <textarea class="chat-box-online-left" id="usersTextArea" readonly="readonly" cols="20"></textarea>
                             <hr class="hr-clas-low" />
 
                         </div>
@@ -124,7 +120,6 @@ if(session.getAttribute("user") == null){
                         </div><!-- Tänne tulee viestit-->
 <!--                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>-->
                             <textarea id="messagesTextArea" readonly="readonly" rows="10" cols="45"> </textarea>
-                            <textarea id="usersTextArea" readonly="readonly" rows="10" cols="3"> </textarea><br/>
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">

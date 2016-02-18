@@ -64,7 +64,7 @@ public class ChatroomServerEndpoint {
     }
     
     private String buildJsonMessageData(String username, String message){
-        JsonObject jsonObject = Json.createObjectBuilder().add("message", username + ":" + message).build();
+        JsonObject jsonObject = Json.createObjectBuilder().add("message", username + ": " + message).build();
         StringWriter stringWriter = new StringWriter();
         try(JsonWriter jsonWriter = Json.createWriter(stringWriter)){
             jsonWriter.write(jsonObject);
