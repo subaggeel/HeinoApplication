@@ -6,6 +6,7 @@ package com.chat.websocket;
  * and open the template in the editor.
  */
 
+import com.chat.app.User;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collections;
@@ -21,31 +22,30 @@ import javax.websocket.server.ServerEndpoint;
 import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonWriter;
+import javax.websocket.EndpointConfig;
 
 /**
  *
  * @author apple
  */
-@ServerEndpoint(value = "/chatroomServerEndpoint", encoders={ChatMessageEncoder.class}, decoders={ChatMessageDecoder.class})
+@ServerEndpoint(value = "/chatroomServerEndpoint", encoders={ChatMessageEncoder.class}, decoders={ChatMessageDecoder.class}, configurator=ChatroomServerConfigurator.class)
 public class ChatroomServerEndpoint {
     static Set<Session> chatroomUsers = Collections.synchronizedSet(new HashSet<Session>());
+    
     @OnOpen
-    public void handleOpen(Session userSession) throws IOException{
+    public void handleOpen(EndpointConfig endpointConfig, Session userSession) throws IOException{
+        userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
         chatroomUsers.add(userSession);
-        Iterator<Session> iterator = chatroomUsers.iterator();
-        while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
     }
     
     @OnMessage
-    public void handleMessage(String message, Session userSession) throws IOException{
+    public void handleMessage(String message, Session userSession) throws IOException{        
         String username = (String) userSession.getUserProperties().get("username");
-        Iterator<Session> iterator = chatroomUsers.iterator();        
-        if (username == null){
-            userSession.getUserProperties().put("username", message);
-            userSession.getBasicRemote().sendText(buildJsonMessageData("System"," you are now connected as  " + message));
-            while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
-        } else {
-            while (iterator.hasNext()) iterator.next().getBasicRemote().sendText(buildJsonMessageData(username, message));
+        if(username!=null){
+            chatroomUsers.stream().forEach(x -> {
+                try {x.getBasicRemote().sendText(buildJsonData(username, message));}
+                catch (Exception e){e.printStackTrace();}
+            });
         }
     }
     
@@ -79,6 +79,15 @@ public class ChatroomServerEndpoint {
             returnSet.add(iterator.next().getUserProperties().get("username").toString());
         }
         return returnSet;
+    }
+    
+    private String buildJsonData(String username, String message){
+        JsonObject jsonObject = Json.createObjectBuilder().add("message", username + ": " + message).build();
+        StringWriter stringWriter = new StringWriter();
+        try(JsonWriter jsonWriter = Json.createWriter(stringWriter)){
+            jsonWriter.write(jsonObject);
+        }
+        return stringWriter.toString();
     }
     
 }

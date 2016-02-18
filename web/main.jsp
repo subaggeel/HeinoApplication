@@ -32,7 +32,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript"> 
-            var websocket = new WebSocket("ws://localhost:8080/webprojectEnhance/chatroomServerEndpoint");
+            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
                 if(jsonData.message != null){
