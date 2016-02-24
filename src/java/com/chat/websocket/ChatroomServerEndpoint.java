@@ -13,6 +13,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
+import static java.util.Spliterators.iterator;
+import static java.util.Spliterators.iterator;
+import static java.util.Spliterators.iterator;
+import static java.util.Spliterators.iterator;
 import javax.json.JsonObject;
 import javax.websocket.OnClose;
 import javax.websocket.OnMessage;
@@ -36,12 +40,14 @@ public class ChatroomServerEndpoint {
     public void handleOpen(EndpointConfig endpointConfig, Session userSession) throws IOException{
         userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
         chatroomUsers.add(userSession);
+        Iterator<Session> iterator = chatroomUsers.iterator();
+        while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
     }
     
     @OnMessage
     public void handleMessage(String message, Session userSession) throws IOException{        
         String username = (String) userSession.getUserProperties().get("username");
-        if(username!=null){
+        if(username!=null){            
             chatroomUsers.stream().forEach(x -> {
                 try {x.getBasicRemote().sendText(buildJsonData(username, message));}
                 catch (Exception e){e.printStackTrace();}
@@ -52,8 +58,8 @@ public class ChatroomServerEndpoint {
     @OnClose
     public void handleClose(Session userSession) throws IOException{
         chatroomUsers.remove(userSession);
-        Iterator<Session> iterator = chatroomUsers.iterator();
-        while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
+        //Iterator<Session> iterator = chatroomUsers.iterator();
+        //while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
     }
     
     private String buildJsonUserData(){

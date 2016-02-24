@@ -64,7 +64,7 @@
 //Check that session exists for user!
 String userName = null;
 if(session.getAttribute("user") == null){
-    response.sendRedirect("login.jsp");
+    response.sendRedirect("index.html");
 }else {
     User usr;    
     usr = (User) session.getAttribute("user");
@@ -104,7 +104,7 @@ if(session.getAttribute("user") == null){
                             </div>
                             <hr class="hr-clas-low">
 
-                            <textarea class="chat-box-online-left" id="usersTextArea" readonly="readonly" cols="20"></textarea>
+                            <textarea class="chat-box-online-left" id="usersTextArea" readonly="readonly" rows="5"cols="20"></textarea>
                             <hr class="hr-clas-low" />
 
                         </div>
