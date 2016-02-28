@@ -36,13 +36,13 @@
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
                 if(jsonData.message != null){
-                	messagesTextArea.value += jsonData.message + " \n";                	
+                	messagesTextArea.value += jsonData.message + "\n";                	
                 }
                 if(jsonData.users != null){
                     usersTextArea.value="";
                     var i = 0;
                     while (i<jsonData.users.length){
-                        usersTextArea.value += jsonData.users[i++] + " \n";
+                        usersTextArea.value += jsonData.users[i++] + "\n";
                     }
                 }   
             }
