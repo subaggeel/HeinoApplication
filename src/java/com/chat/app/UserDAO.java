@@ -22,6 +22,7 @@ public class UserDAO {
         USERS.put("pauliina", new User("pauliina", "123", "Ms.Ninja Paupi Parkkinen"));
         USERS.put("abdi", new User("abdi", "123", "Mr.Mohammed Cabdi"));
         USERS.put("minhvo", new User("minhvo", "123", "Mr.Minh Hoang VO"));
+        USERS.put("peter", new User("peter", "123", "Mr.Peter Hjort"));
     }
     
     

@@ -10,8 +10,10 @@ import com.chat.app.User;
 import java.io.IOException;
 import java.io.StringWriter;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Map;
 import java.util.Set;
 import static java.util.Spliterators.iterator;
 import static java.util.Spliterators.iterator;
@@ -27,26 +29,40 @@ import javax.json.Json;
 import javax.json.JsonArrayBuilder;
 import javax.json.JsonWriter;
 import javax.websocket.EndpointConfig;
+import javax.websocket.server.PathParam;
 
 /**
  *
  * @author apple
  */
-@ServerEndpoint(value = "/chatroomServerEndpoint", encoders={ChatMessageEncoder.class}, decoders={ChatMessageDecoder.class}, configurator=ChatroomServerConfigurator.class)
+@ServerEndpoint(value = "/chatroomServerEndpoint/{chatroom}", encoders={ChatMessageEncoder.class}, decoders={ChatMessageDecoder.class}, configurator=ChatroomServerConfigurator.class)
 public class ChatroomServerEndpoint {
-    static Set<Session> chatroomUsers = Collections.synchronizedSet(new HashSet<Session>());
+    static Map<String,Set<Session>> chatrooms = (Map<String,Set<Session>>)Collections.synchronizedMap(new HashMap<String,Set<Session>>());
+    
+    public Set<Session> getChatroom(String chatroomName){
+        Set<Session> chatroom = chatrooms.get(chatroomName);
+        if(chatroom==null){
+            chatroom = Collections.synchronizedSet(new HashSet<Session>());
+            chatrooms.put(chatroomName, chatroom);
+        }
+        return chatroom;
+    }
     
     @OnOpen
-    public void handleOpen(EndpointConfig endpointConfig, Session userSession) throws IOException{
+    public void handleOpen(EndpointConfig endpointConfig, Session userSession, @PathParam("chatroom") String chatroom) throws IOException{
         userSession.getUserProperties().put("username", endpointConfig.getUserProperties().get("username"));
+        userSession.getUserProperties().put("chatroom",chatroom);
+        Set<Session> chatroomUsers = getChatroom(chatroom);
         chatroomUsers.add(userSession);
         Iterator<Session> iterator = chatroomUsers.iterator();
-        while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
+        while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData(chatroomUsers));
     }
     
     @OnMessage
     public void handleMessage(String message, Session userSession) throws IOException{        
         String username = (String) userSession.getUserProperties().get("username");
+        String chatroom = (String)userSession.getUserProperties().get("chatroom");
+        Set<Session> chatroomUsers = getChatroom(chatroom);
         if(username!=null){            
             chatroomUsers.stream().forEach(x -> {
                 try {x.getBasicRemote().sendText(buildJsonData(username, message));}
@@ -57,13 +73,15 @@ public class ChatroomServerEndpoint {
     
     @OnClose
     public void handleClose(Session userSession) throws IOException{
+        String chatroom = (String)userSession.getUserProperties().get("chatroom");
+        Set<Session> chatroomUsers = getChatroom(chatroom);
         chatroomUsers.remove(userSession);
         //Iterator<Session> iterator = chatroomUsers.iterator();
         //while (iterator.hasNext()) (iterator.next()).getBasicRemote().sendText(buildJsonUserData());
     }
     
-    private String buildJsonUserData(){
-        Iterator<String> iterator = getUserNames().iterator();
+    private String buildJsonUserData(Set<Session> chatroomUsers){
+        Iterator<String> iterator = getUserNames(chatroomUsers).iterator();
         JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
         while(iterator.hasNext()) jsonArrayBuilder.add((String) iterator.next());
         return Json.createObjectBuilder().add("users", jsonArrayBuilder).build().toString();
@@ -78,7 +96,7 @@ public class ChatroomServerEndpoint {
         return stringWriter.toString();
     }
     
-    private Set<String> getUserNames(){
+    private Set<String> getUserNames(Set<Session> chatroomUsers){
         HashSet<String> returnSet = new HashSet<>();
         Iterator<Session> iterator = chatroomUsers.iterator();
         while(iterator.hasNext()){

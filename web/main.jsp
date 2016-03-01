@@ -3,6 +3,7 @@
     Created on : Feb 15, 2016, 1:06:03 PM
     Author     : parkkpau1
 --%>
+<%@page import="javax.jms.Session"%>
 
 <%@page import="com.chat.app.User"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -34,7 +35,7 @@
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
         <script type="text/javascript"> 
-            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
+            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint/${roomName}");
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
                 if(jsonData.message != null){
@@ -107,7 +108,8 @@ if(session.getAttribute("user") == null){
                         </form>
                     </li>
                     <li>
-                        <h6 style="color:whitesmoke">Welcome <%=userName %> !</h6>
+                        <h3 style="color:whitesmoke">Welcome <%=userName %> !</h3>
+                        <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
                     </li>
                 </ul>
             </div>
@@ -135,7 +137,7 @@ if(session.getAttribute("user") == null){
                         <div class="panel-body chat-box-online" id="users" onclick="pres1()">
 
                             <div class="chat-box-online-head">
-                                ONLINE USERS
+                                ONLINE USERS IN THIS CHAT ROOM
                             </div>
                             <hr class="hr-clas-low">
                             
