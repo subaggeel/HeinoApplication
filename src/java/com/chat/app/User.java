@@ -105,8 +105,4 @@ public class User implements Serializable {
         this.department = department;
     }
     
-    
-    
-    
-    
 }
