@@ -5,8 +5,9 @@
  */
 package com.chat.APIResources;
 
-import javax.ws.rs.core.Context;
-import javax.ws.rs.core.UriInfo;
+import com.chat.app.User;
+import com.chat.app.UserStore;
+import java.util.List;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
@@ -22,25 +23,35 @@ import javax.ws.rs.core.MediaType;
 @Path("/Users")
 public class UserResource {
 
-    @Context
-    private UriInfo context;
+    private final UserStore users;
+//    @Context
+//    private UriInfo context;
 
     /**
      * Creates a new instance of UserResource
      */
     public UserResource() {
+        this.users = UserStore.getInstance();
     }
 
     /**
-     * Retrieves representation of an instance of com.chat.app.UserResource
+     * Retrieves representation of an instance of com.chat.APIResources.UserResource
      * @return an instance of java.lang.String
      */
+    //TOIMII!  ---> Lisää admin tarkistus!!
     @GET
     @Produces(MediaType.APPLICATION_XML)
-    public String getXml() {
-        //TODO return proper representation object
-        throw new UnsupportedOperationException();
+    public List<User> getAll() {
+        return users.getAllUsers();
     }
+    
+    //EI TOIMI REST TESTISSÄ - mutta voi käyttää jos parsii JacaScript puolella listan
+//    @GET
+//    @Produces(MediaType.APPLICATION_XML)
+//    public List<String> getAllNames() {
+//        return users.findAll();
+//    }
+
 
     /**
      * PUT method for updating or creating an instance of UserResource
@@ -51,3 +62,4 @@ public class UserResource {
     public void putXml(String content) {
     }
 }
+
