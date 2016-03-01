@@ -70,7 +70,7 @@ public class LoginServlet extends HttpServlet {
             session.setAttribute("user", UserDAO.getUser(user)); //TODO: fix return values, dublicate user call...
             session.setMaxInactiveInterval(30*60);
             //EncodedURL incase cookies are not used (JSESSIONID)
-            String encodedURL = response.encodeRedirectURL("main.jsp");
+            String encodedURL = response.encodeRedirectURL("index.jsp");
             response.sendRedirect(encodedURL);
         }
         else

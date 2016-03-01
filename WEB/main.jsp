@@ -63,7 +63,7 @@
             
         </script>
     </head>
-    <body onload="add()">
+    <body onload="makeUL(array)">
 <%
 //Check that session exists for user!
 String userName = null;
@@ -75,15 +75,14 @@ if(session.getAttribute("user") == null){
     userName = usr.getFullName();
 }
 %>
-      
-       
+
         <div class="container-fluid">
                  
            <nav class="navbar navbar-inverse" role="navigation" id="nav" >
         <div class="container" id="nav" >
             <!-- Brand and toggle get grouped for better mobile display -->
             <div class="navbar-header">
-               <button type="button" class="navbar-toggle-pull-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="buton">
+               <button type="button" class="navbar-toggle-pull-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
                     <span class="fa fa-align-left"></span>
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
@@ -97,17 +96,17 @@ if(session.getAttribute("user") == null){
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
                     <li>
-                        <a href="#"><i class="fa fa-cog" style="color:white">My Account</i></a>
+                        <a href="#"><i class="fa fa-cog" style="color:white"><%=userName %></i></a>
                     </li>
                     <li>
                         <form id="myform" action="<%=response.encodeURL("LogoutServlet") %>" method="post">
                            
-                            <button class="btn btn-info btn-logout" type="submit" value="Logout" id="logoutbut" ><i class="fa fa-log-ou" style="color:white" >LogOut</i></button> 
+                            <button class="btn btn-info btn-logout" type="submit" value="Logout" id="logoutbut" ><i class="fa fa-log-ou" style="color:black" >LogOut</i></button> 
 
                         </form>
                     </li>
                     <li>
-                        <h6 style="color:whitesmoke">Welcome <%=userName %> !</h6>
+                        <h6 style="color:whitesmoke">Welcome !</h6>
                     </li>
                 </ul>
             </div>
@@ -134,19 +133,12 @@ if(session.getAttribute("user") == null){
                         </div>
                         <div class="panel-body chat-box-online" id="users" onclick="pres1()">
 
-                            <div class="chat-box-online-head">
-                                ONLINE USERS
-                            </div>
-                            <hr class="hr-clas-low">
                             
-
-                            <textarea class="chat-box-online-left" id="usersTextArea">
+                            <hr class="hr-clas-low">
                             <img src="images/user.gif" alt="bootstrap Chat box user image" class="img-circle" />
-                            </textarea>
+
+                            <textArea class="chat-box-online-left" id="usersTextArea" readonly="readonly" rows="1"cols="10"> </textArea>
                             <hr class="hr-clas-low" />
-                            <div class="chat-box-online-head">
-                                Other Users
-                            </div>
 
                         </div>
 
@@ -158,11 +150,10 @@ if(session.getAttribute("user") == null){
                     <div class="chat-box-div">
                         <div class="chat-box-head">
                             GROUP CHAT HISTORY
-                            
                         </div><!-- Tänne tulee viestit-->
 <!--                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>-->
                             
-                            <textArea id="messagesTextArea" readonly="readonly" rows="10" cols="59"> </textArea>
+                            <textArea id="messagesTextArea" readonly="readonly" rows="10" cols="58"> </textArea>
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
@@ -173,7 +164,7 @@ if(session.getAttribute("user") == null){
                             </div>
                             <div class="btn-group">
                                      <a class="btn btn-default" href="#"><i class="fa fa-camera"></i></a>
-                                     <a class="btn btn-default" id="question" href="#"><i class="fa fa-smile-o"></i></a>
+                                     <a class="btn btn-default" href="#"><i class="fa fa-smile-o"></i></a>
                                      <a class="btn btn-default" href="#"><i class="fa fa-thumbs-o-up"></i></a>
                                      <a class="btn btn-default" href="#"><i class="fa fa-align-justify"></i></a>
                                    </div>
@@ -185,7 +176,7 @@ if(session.getAttribute("user") == null){
                      
                     <div class="chat-box-new-div">
                         <div class="chat-box-new-head">
-                            DETAILS
+                            Details
                         </div>
                         <div class="panel-body chat-box-new" id="chat" >
 
@@ -208,8 +199,6 @@ if(session.getAttribute("user") == null){
        <script src="js/jquery-1.11.1.js"></script>
     <!-- CORE BOOTSTRAP SCRIPTS  FILE -->
     <script src="js/bootstrap.js"></script>
-    <script type="text/javascript">$('messagesTextArea').emojiarea();</script>
-
         <script>
                                         function pres() {
 
@@ -263,21 +252,10 @@ if(session.getAttribute("user") == null){
     // Finally, return the constructed list:
     return list;
 }
-
-  function set_body_width() { // set body height = window height
-    var wh = $(window).width();
-    $(".imgFitWindowResize").width(wh);
-  }
-  $(document).ready(function() {
-    set_body_width();
-    $(window).bind('resize', function() { set_body_width(); });
-  });
-
+document.getElementById('chat').appendChild(makeUL(jsonData.users[0]));
                                         
                                         
-          
-         
-
+                                 
 
         </script>
     </body>

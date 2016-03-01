@@ -1,9 +1,12 @@
+<%-- 
+    Document   : index
+    Created on : 17.2.2016, 12:44:48
+    Author     : nadiira
+--%>
+
+<%@page import="com.chat.app.User"%>
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <html>
     <head>
         <meta charset="utf-8" />
@@ -21,53 +24,96 @@ and open the template in the editor.
         <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet">
         <!-- CUSTOM STYLE CSS -->
         <link href="css/style1.css" rel="stylesheet" />
+        <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
+        <link rel="stylesheet" href="css/bootstrap-theme.min.css" type="text/css"/>
+
+
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
-        <script type="text/javascript"> 
-            var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint");
+         <script type="text/javascript"> 
+            var websocket = new WebSocket("ws://localhost:8080/webprojectEnhance/chatroomServerEndpoint");
             websocket.onmessage = function processMessage(message){
                 var jsonData = JSON.parse(message.data);
-                if(jsonData.message !== null) messagesTextArea.value += jsonData.message + "\n";
+                if(jsonData.message !== null){
+                	messagesTextArea.value += jsonData.message + " \n";                	
+                }
+                if(jsonData.users !==null){
+                    usersTextArea.value="";
+                    var i = 0;
+                    while (i<jsonData.users.length){
+                        usersTextArea.value += jsonData.users[i++] + " \n";
+                    }
+                }   
             };
-            
+                        
             function sendMessage(){
                 websocket.send(messageText.value);
                 messageText.value = "";
             }
             
+            window.onbeforeunload = function(){
+                websocket.onclose = function(){};
+                websocket.close();
+            };
+            
         </script>
     </head>
     <body onload="displayDate()">
-
+        <%
+//Check that session exists for user!
+String userName = null;
+if(session.getAttribute("user") == null){
+    response.sendRedirect("index.html");
+}else {
+    User usr;    
+    usr = (User) session.getAttribute("user");
+    userName = usr.getFullName();
+}
+%>
+ 
+       
 
         <div class="container-fluid">
-            <div>
-
-                <!-- Nav tabs -->
-                <ul class="nav nav-tabs" role="tablist" id="tab">
-                    <li class="active"><a href="#users" aria-controls="users"  data-toggle="collapse" >Home</a></li>
-                    <li ><a href="#profile" aria-controls="profile" role="tab"  ><span class="glyphicon glyphicon-user" style="color:white">Profile</span></a></li>
-                    <li ><a href="#messages" aria-controls="messages" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-users" style="color:white">Groups</span></a></li>
-                    <li role="presentation"><a href="#settings" aria-controls="settings" role="tab" data-toggle="tab"><span class="glyphicon glyphicon-log-out-sign-out" style="color:white">Logout</span></a></li>
-                    <li role="presentation">
-                        <div class="form-group center" id="serc">
-                            <form action="">
-                            <label for="query"></label>
-                            <input type="text" class="form-control" name="search" id="search" placeholder="Search users"> 
-                            </form>
-                        </div>
-                    </li>
-
-                </ul>
-                
-
-
-
+            
+           <nav class="navbar navbar-inverse" role="navigation" id="nav" >
+        <div class="container" id="nav" >
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle-pull-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#" id="logo">
+                    <img src="images/hospital-logo-hi.png" alt="" height="50" width="50">
+                </a>
             </div>
-
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right">
+                    <li>
+                        <a href="#"><i class="fa fa-cog" style="color:black"><%=userName %></i></a>
+                    </li>
+                    <li>
+                        <form action="<%=response.encodeURL("LogoutServlet") %>" method="post">
+                       <button class="btn btn-info btn-logout" type="submit" value="Logout" id="logoutbut" ><i class="fa fa-log-ou" style="color:black" >LogOut</i></button> 
+                        </form>
+                    </li>
+                    <li>
+                        <h6 style="color:whitesmoke">Welcome !</h6>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+        <!-- /.container -->
+   </nav>
+           
+  
             <div class="row pad-top pad-bottom">
 
 
@@ -78,43 +124,26 @@ and open the template in the editor.
 
                 
                            <div class="input-group">
-      <input type="text" class="form-control" placeholder="Search for...">
+      <input type="text" class="form-control" placeholder="Search for users...">
       <span class="input-group-btn">
-          <span class="glyphicon glyphicon-search" ><button class="btn btn-info" type="button" id="button4">Go!</button></span>
-      </span> <button class="btn btn-info" type="button" id="button3"><span class="glyphicon glyphicon-plus-sign"></span></button>
-
+          <button class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+      </span>
     </div>
                             
                         </div>
-                        <div class="panel-body chat-box-online" id="users">
+                        
 
                             
                             <hr class="hr-clas-low">
                             <div class="chat-box-online-head">
                                 Recent Chats
                             </div>
+                            <div class="chat-box-online-right" >
+                                <textarea class="chat-box-online-left" id="usersTextArea" readonly="readonly" rows="5"cols="20"> </textarea>
 
-                            <div class="chat-box-online-left" id="us" onclick="pres3()" >
-                                <img src="images/img1.jpg" alt=" user image" class="img-circle"  />
-                                -  Hanna Salminen
-                                <br />
-                                ( <small>Active from 3 hours</small> )
                             </div>
-                            <hr class="hr-clas-low" />
 
-                            <div class="chat-box-online-left" id="in" onclick="pres()" >
-                                <img src="images/img3.jpg" alt="bootstrap Chat box user image" class="img-circle"  />
-                                -  Minh vo
-                                <br />
-                                ( <small>Active from 10 hours</small> )
-                            </div>
-                            <hr class="hr-clas-low" />
-                            <div class="chat-box-online-left" id="user1" onclick="pres1()">
-                                <img src="images/img4.jpg" alt="bootstrap Chat box user image" class="img-circle"  />
-                                -  Michael Jackson
-                                <br />
-                                ( <small>Active from 3 hours</small> )
-                            </div>
+                
                             <hr class="hr-clas-low" />
                             <div class="chat-box-online-head">
                                 Other Users
@@ -122,7 +151,8 @@ and open the template in the editor.
 
                             <div class="chat-box-online-right">
                                 <img src="images/user.gif" alt="bootstrap Chat box user image" class="img-circle" />
-                                -  Kevin Hart
+                                  <textarea class="chat-box-online-left" id="usersTextArea" readonly="readonly" rows="5"cols="20"> </textarea>
+
                                 <br />
                                 ( <small>Active from 10 hours</small> )
                             </div>
@@ -161,34 +191,19 @@ and open the template in the editor.
 
                     </div>
 
-                </div>
+                
 
                 <div class=" col-lg-4 col-md-4 col-sm-4" id="demo">
                     <div class="chat-box-div">
                         <div class="chat-box-head">
                             GROUP CHAT HISTORY
-                            <div class="btn-group pull-right">
-                                
-                                <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" >
-                                    <span class="glyphicon glyphicon-cog"></span>
-                                    <span class="sr-only">Toggle Dropdown</span>
-                                </button>
-                                <ul class="dropdown-menu" role="menu">
-                                    <li><a href="#"><span class="glyphicon glyphicon-map-marker"></span>&nbsp;Invisible</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-comment"></span>&nbsp;Online</a></li>
-                                    <li><a href="#"><span class="glyphicon glyphicon-lock"></span>&nbsp;Busy</a></li>
-                                    <li class="divider"></li>
-                                    
-                                </ul>
-                            </div>
-                            <div class="btn-group" id="but1">
-                                
-                                <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-user"></span></button>
-
-                            </div>
+                            
+                        
                             
                         </div><!-- Tänne tulee viestit-->
-                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>>
+                        
+                        <textarea id="messagesTextArea" readonly="readonly" rows="10" cols="45" class="panel-body chat-box-main"> </textarea>
+                        <textarea id="usersTextArea" readonly="readonly" rows="10" cols="3"> </textarea><br/>
 
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
@@ -198,11 +213,17 @@ and open the template in the editor.
                                     <button class="btn btn-info" type="button" onclick="sendMessage();">SEND</button>
                                 </span>
                             </div>
+                            <div class="btn-group">
+                                     <a class="btn btn-default" href="#"><i class="fa fa-camera"></i></a>
+                                     <a class="btn btn-default" href="#"><i class="fa fa-smile-o"></i></a>
+                                     <a class="btn btn-default" href="#"><i class="fa fa-thumbs-o-up"></i></a>
+                                     <a class="btn btn-default" href="#"><i class="fa fa-align-justify"></i></a>
+                                   </div>
                         </div>
 
                     </div>
 
-                </div>
+                
                 <div class="col-lg-4 col-md-4 col-sm-4" >
                     <div class="chat-box-new-div">
                         <div class="chat-box-new-head">
@@ -223,7 +244,8 @@ and open the template in the editor.
 
                 </div>
             </div>
-        
+        </div>
+    
 
         <!-- USING SCRIPTS BELOW TO REDUCE THE LOAD TIME -->
         <!-- CORE JQUERY SCRIPTS FILE -->
@@ -265,10 +287,10 @@ and open the template in the editor.
                                         }
                                         
                                         
-                                        
+                                      
+                                 
                                  
 
         </script>
     </body>
-
 </html>

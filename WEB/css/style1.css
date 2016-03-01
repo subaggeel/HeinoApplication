@@ -16,6 +16,7 @@ and open the template in the editor.
     margin-bottom:25px;
     margin-left:30px;
 }
+
 #button4{
     margin-bottom:25px;
     margin-left:5px;
@@ -26,12 +27,30 @@ and open the template in the editor.
     width:200px;
     
 }
+#logo{
+    margin-bottom:29px;
+}
 #users{
 background:#FAF7F5;
 }
-ul li a{
-
+ul li{
+   display:block;
+   margin-top: 10px;
+   
+   
 }
+li a{
+    margin-left:5px;
+    margin-right:5px;
+    background:lightskyblue;
+    padding:0px;
+}
+.navbar navbar-inverse{
+    background: #00b0b3;
+}
+
+
+
 #chat{
 background:#FAF7F5;
 }
@@ -47,8 +66,8 @@ body {
 
 
 }
-#but1{
-    margin-left:100px;
+li fo{
+    padding:20px;
     
 }
 but2{
@@ -77,19 +96,73 @@ margin-bottom:0 px;
     height:500px;
     overflow:auto;
 }
+#messagesTextArea{
+    height: 500px;
+    background: transparent;
+    resize: none;
+    font-family: Tahoma, sans-serif;
+   
+    color:black;
+    font-size:14px;
+
+
+
+  
+}
+#backmodel {
+    position: absolute;
+    top: 7px;
+    left: 32px;
+    background-color: #D8DFEA;
+    width: 53px;
+    height: 9pt;
+}
+    
+#usersTextArea{
+    background: transparent;
+    border:1px #ddd solid;
+    font: 9pt Consolas;
+    width: 289px;
+    resize: none;
+    overflow:auto;
+    font-family: Tahoma, sans-serif;
+
+   
+}
+
 .chat-box-div {
-    border:1px solid #03DB2F ;
-    border-bottom:1px solid #03DB2F;
+    border:1px solid #00b0b3 ;
+    border-bottom:1px solid #00b0b3;
 } 
 .chat-box-head {
     padding: 10px 15px;
-border-bottom: 1px solid #03DB2F;
+border-bottom: 1px solid #00b0b3;
 background-color:  #00b0b3;
 color: #fff;
 text-align: center;
 
 }
-
+#nav{
+    background-color:#00b0b3 ;
+    margin-left: 0px;
+    margin-right:0px;
+    margin-bottom: 0px;
+    margin-top: 2px;
+    width: 100%;
+}
+li h6{
+  margin-left: 20px;
+  font-family: cursive;  
+}
+.navbar-inverse {
+  background-color:#00b0b3;
+  background-image: none;
+  background-repeat: no-repeat;
+ }
+#logoutbut{
+    padding:14px;
+    margin-top:0px;
+}
 .chat-box-left {
     width: 100%;
     height: auto;
@@ -173,7 +246,7 @@ text-align: center;
     cursor: pointer;
 }
 .chat-box-online {
-     max-height:554px;
+     height:571px;
     overflow:auto;
     
     
@@ -182,13 +255,13 @@ text-align: center;
 
 
 .chat-box-online-div {
-    border:1px solid #03DB2F;
-    border-bottom:1px solid #03DB2F;
+    border:1px solid #00b0b3;
+    border-bottom:1px solid #00b0b3;
 } 
 
 .chat-box-online-head {
     padding: 10px 15px;
-border-bottom: 2px solid #03DB2F;
+border-bottom: 2px solid #00b0b3;
 background-color: #00b0b3;
 color: #fff;
 text-align: center;
@@ -222,18 +295,18 @@ text-align: center;
 ======================================= */
 
 .chat-box-new {
-     height:300px;
+     height:554px;
     overflow:auto;
 }
 .chat-box-new-div {
-    border:1px solid #03DB2F;
-    border-bottom:1px solid #03DB2F;
+    border:1px solid #00b0b3 ;
+    border-bottom:1px solid #00b0b3;
     
 } 
 
 .chat-box-new-head {
     padding: 10px 15px;
-border-bottom: 2px solid #03DB2F;
+border-bottom: 2px solid #00b0b3;
 background-color: #00b0b3;
 color: #fff;
 text-align: center;
