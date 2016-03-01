@@ -150,7 +150,7 @@
                                 Other Users
                             </div>
                             <div class="list-group" id="user-list">
-                                <!-- List of users here -->
+                                <!-- List of users here !! -->
                             </div>
 
                         </div>

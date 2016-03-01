@@ -5,7 +5,7 @@
                     findAll();
                     });
 
-                    var rootURL = "http://localhost:8080/ChatTEST2/webresources/Users";
+                    var rootURL = "http://localhost:8080/ChatApplication/webresources/Users";
 
                     function findAll() {
                         var data;
