@@ -126,6 +126,12 @@ public class UserStore {
         return theUser;
     }
 
+    /**
+     *
+     * @param username
+     * @param password
+     * @return
+     */
     public boolean isValidUser(String username, String password) {
         User usr = (User) users.get(username); //username as key
         if (usr != null) {

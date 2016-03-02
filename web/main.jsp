@@ -51,8 +51,10 @@
             }
 
             function sendMessage() {
-                websocket.send(messageText.value);
-                messageText.value = "";
+                if(messageText.value != "") {
+                    websocket.send(messageText.value);
+                    messageText.value = "";
+                }
             }
 
             window.onbeforeunload = function () {
@@ -142,8 +144,8 @@
                             <hr class="hr-clas-low">
 
 
-                            <textarea class="chat-box-online-left" id="usersTextArea">
-                            <img src="images/user.gif" alt="bootstrap Chat box user image" class="img-circle" />
+                            <textarea class="chat-box-online-left" readonly="readonly" id="usersTextArea">
+
                             </textarea>
                             <hr class="hr-clas-low" />
                             <div class="chat-box-online-head">
@@ -171,7 +173,7 @@
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="messageText" onkeypress="if (event.keyCode == 13) {
+                                <input type="text" class="form-control" placeholder="Enter Text Here..." id="messageText" required autofocus onkeypress="if (event.keyCode == 13) {
                                             sendMessage();
                                         }">
                                 <span class="input-group-btn">
