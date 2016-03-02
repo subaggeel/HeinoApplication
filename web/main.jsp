@@ -209,7 +209,9 @@
                 </div>
                 
         </div>
-
+        
+        <input type="hidden" id="current-user" type="text" visibility="hidden" value="<%= session.getAttribute("username") %>"/>
+        
         <!-- USING SCRIPTS BELOW TO REDUCE THE LOAD TIME -->
         <!-- CORE JQUERY SCRIPTS FILE -->
        <script src="js/jquery-1.11.1.js"></script>
