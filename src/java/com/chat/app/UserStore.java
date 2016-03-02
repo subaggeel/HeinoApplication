@@ -29,7 +29,10 @@ public class UserStore {
 //        users.add(new User("matti1", "123", "Matti Virtanen"));
 //        users.add(new User("maija1", "123", "Maija Mehiläinen"));
         users.put("matti1", new User("matti1", "123", "Matti", "Virtanen"));
-        users.put("maija1", new User("maija1", "123", "Maija", "Mehiläinen"));
+        users.put("maija1", new User("maija1", "123", "Maija", "Mehiläinen"));               
+        users.put("pauliina", new User("pauliina", "123", "Pauliina", "Parkkinen"));
+        users.put("abdi", new User("abdi", "123", "Mohammed", "Cabdi"));
+        users.put("minhvo", new User("minhvo", "123", "Minh Hoang", "VO"));
 
 //		try {
 //			FileOutputStream out = new FileOutputStream("users.ser");
@@ -49,15 +52,15 @@ public class UserStore {
         List<String> names = new ArrayList<>();
         Iterator it = users.keySet().iterator();
         while (it.hasNext()) {
-            
+
             String id = (String) it.next();
             User usr = (User) users.get(id);
             names.add(usr.getFullName());
         }
         return names;
     }
-    
-        public List<User> getAllUsers() {
+
+    public List<User> getAllUsers() {
         List<User> userList = new ArrayList<>(users.values());
         return userList;
     }
@@ -88,7 +91,7 @@ public class UserStore {
             User usr = (User) users.get(id);
             if (usr.getFullName().toLowerCase().startsWith(name)
                     || usr.getUsername().toLowerCase().startsWith(name)) {
-                uList.add(usr); 
+                uList.add(usr);
             }
         }
         return uList;
@@ -102,7 +105,7 @@ public class UserStore {
             User usr = (User) users.get(id);
             if (usr.getFullName().toLowerCase().startsWith(name)
                     || usr.getUsername().toLowerCase().startsWith(name)) {
-                uList.add(usr.getFullName()); 
+                uList.add(usr.getFullName());
             }
         }
         return uList;
@@ -121,6 +124,21 @@ public class UserStore {
 
         }
         return theUser;
+    }
+
+    public boolean isValidUser(String username, String password) {
+        User usr = (User) users.get(username); //username as key
+        if (usr != null) {
+            //check the password
+            return usr.getPassword().equals(password);
+        } else {
+                    return false;
+        }
+    }
+    
+        public User getUserByID(String username) {
+        User usr = (User) users.get(username); //username as key
+        return usr;
     }
 
 }

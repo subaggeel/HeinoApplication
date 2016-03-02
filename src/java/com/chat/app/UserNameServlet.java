@@ -13,10 +13,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-/**
- *
- * @author apple
- */
 @WebServlet("/UserNameServlet")
 public class UserNameServlet extends HttpServlet {
     private static final long serialVersionUID = 1L;
@@ -40,7 +36,7 @@ public class UserNameServlet extends HttpServlet {
         if(validateUser(username, password))
         {
             HttpSession session = request.getSession();
-            session.setAttribute("user", UserDAO.getUser(username)); //TODO: fix return values, dublicate user call...
+            session.setAttribute("user", UserStore.getInstance().getUserByID(username)); //TODO: fix return values, dublicate user call...
             session.setMaxInactiveInterval(30*60);
             //EncodedURL incase cookies are not used (JSESSIONID)
             
@@ -56,8 +52,7 @@ public class UserNameServlet extends HttpServlet {
         }
 
     private boolean validateUser(String username, String password) {
-        User usr = UserDAO.getUser(username);
-        return usr != null && usr.getPassword().equals(password);
+        return UserStore.getInstance().isValidUser(username, password);
     }
     
 }
