@@ -25,7 +25,7 @@ public class UserNameServlet extends HttpServlet {
      * @throws IOException
      */
     @Override
-    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         
         String username = request.getParameter("username");
@@ -48,6 +48,8 @@ public class UserNameServlet extends HttpServlet {
             if (username != null){
                 request.getRequestDispatcher("main.jsp").forward(request,response);
             }
+        } else{
+            response.sendRedirect("loginfail.jsp");
         }
         }
 

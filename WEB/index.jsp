@@ -16,7 +16,7 @@
     <meta name="author" content="">
     
 
-    <title>Signin Template for Bootstrap</title>
+    <title>Login Page</title>
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -49,7 +49,7 @@
       
     <div class="container" id="logincont">
 
-      <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()">
+      <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         
         <label for="username" class="sr-only">Username</label>
