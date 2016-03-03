@@ -25,7 +25,7 @@ $(document).ready(function () {
 
 
     function renderList(username, name) {
-        if (username != currentUser) {
+       if (username != currentUser) {
             var button;
             var text;
             button = document.createElement("BUTTON");
