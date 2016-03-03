@@ -69,19 +69,20 @@ public class UserStore {
         return users.keySet();
     }
 
-    public String getUserSuggestive(String name) {
-        String res = "";
+    public List<User> getComplete(String name) {
+        List<User> uList = new ArrayList<>();
         Iterator it = users.keySet().iterator();
         while (it.hasNext()) {
             String id = (String) it.next();
             User usr = (User) users.get(id);
             if (usr.getFullName().toLowerCase().startsWith(name)
                     || usr.getUsername().toLowerCase().startsWith(name)) {
-                res = usr.getFullName();
+                uList.add(usr);
             }
         }
-        return res;
+        return uList;
     }
+
 
     public List getUserListSuggestive(String name) {
         List<User> uList = new ArrayList<>();
@@ -111,20 +112,6 @@ public class UserStore {
         return uList;
     }
 
-    public User getCompleteXML(String name) {
-        Iterator it = users.keySet().iterator();
-        User theUser = null;
-        while (it.hasNext()) {
-            String id = (String) it.next();
-            User usr = (User) users.get(id);
-            if (usr.getFullName().toLowerCase().startsWith(name)
-                    || usr.getUsername().toLowerCase().startsWith(name)) {
-                theUser = usr;
-            }
-
-        }
-        return theUser;
-    }
 
     /**
      *

@@ -129,14 +129,14 @@
                         <div class="chat-box-online-head">
 
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search for users...">
+                                <input type="text" id="usersearch" class="form-control" placeholder="Search for users...">
                                 <span class="input-group-btn">
-                                    <button class="btn btn-secondary" type="button"><span class="glyphicon glyphicon-search"></span></button>
+                                    <button class="btn btn-secondary" type="button" id="searchbutton"><span class="glyphicon glyphicon-search"></span></button>
                                 </span>
                             </div> 
 
                         </div>
-                        <div class="panel-body chat-box-online" id="users" onclick="pres1()">
+                        <div class="panel-body chat-box-online" id="users">
 
                             <div class="chat-box-online-head">
                                 ONLINE USERS IN THIS CHAT ROOM

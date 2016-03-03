@@ -12,6 +12,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.GET;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -45,13 +46,12 @@ public class UserResource {
         return users.getAllUsers();
     }
     
-    //EI TOIMI REST TESTISSÄ - mutta voi käyttää jos parsii JacaScript puolella listan
-//    @GET
-//    @Produces(MediaType.APPLICATION_XML)
-//    public List<String> getAllNames() {
-//        return users.findAll();
-//    }
-
+    @GET
+    @Path("/{complete}")
+    @Produces(MediaType.APPLICATION_XML)
+    public List<User> getComplete(@PathParam("complete") String name) {
+        return users.getComplete(name);
+    }  
 
     /**
      * PUT method for updating or creating an instance of UserResource
