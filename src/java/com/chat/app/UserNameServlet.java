@@ -48,6 +48,8 @@ public class UserNameServlet extends HttpServlet {
             if (username != null){
                 request.getRequestDispatcher("main.jsp").forward(request,response);
             }
+        } else{
+            response.sendRedirect("loginfail.jsp");
         }
         }
 
