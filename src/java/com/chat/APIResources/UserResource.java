@@ -59,7 +59,8 @@ public class UserResource {
      */
     @PUT
     @Consumes(MediaType.APPLICATION_XML)
-    public void putXml(String content) {
+    public void createUser(User usr) {
+        users.createUser(usr);     
     }
 }
 
