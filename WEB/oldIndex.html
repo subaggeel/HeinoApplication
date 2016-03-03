@@ -210,7 +210,10 @@ and open the template in the editor.
                         </div>
                         <div class="panel-body chat-box-new" id="chat" >
 
-                            
+                            <li>
+                                <h3 style="color:whitesmoke">Welcome <%=userName%> !</h3>
+                                <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
+                            </li>
                             
                         </div>
                         <div>
@@ -260,6 +263,25 @@ and open the template in the editor.
                                             var c = a.value;
 
                                             b.innerHTML = a;
+                                            
+                                            
+                                           function renderList(username, name) {
+                                               
+                                                   
+                                                   
+                                                   if (username != currentUser) {
+            var button;
+            var text;
+            button = document.createElement("BUTTON");
+            button.className = "list-group-item";
+            button.id = username;
+            button.value = username;
+            button.type = "button";
+            text = document.createTextNode(name);
+            button.appendChild(text);
+            $('#user-list').append(button);
+        }
+    }
 
 
                                         }
@@ -269,6 +291,31 @@ and open the template in the editor.
                                  
 
         </script>
+                   <div class="panel-group">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">
+          
+        </h4>
+      </div>
+      <div >
+         <div class="panel-body">
+             <img src="images/img1.jpg" alt="picture" class="img-thumbnail">
+        
+          </div>
+              <div class="panel-footer">
+                  <ul class="list-group">
+                      <label for="usrname">Name:</label>
+                      <li class="list-group-item" id="usrname"><%=userName%></li>
+     
+                      <li class="list-group-item"></li>
+                      <li class="list-group-item">Third item</li>
+                  </ul>
+        
+                </div>
+      </div>
+    </div>
+  </div>
     </body>
 
 </html>

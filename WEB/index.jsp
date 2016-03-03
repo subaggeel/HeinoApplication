@@ -47,7 +47,7 @@
 
   <body>
       
-    <div class="container">
+    <div class="container" id="logincont">
 
       <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
@@ -78,6 +78,24 @@
     </div> <!-- /container -->
 
     <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
-    <script src="/js/ie10-viewport-bug-workaround.js"></script>
+    <script src="/js/ie10-viewport-bug-workaround.js">
+        
+        if (username != currentUser) {
+            var button;
+            var text;
+            button = document.createElement("BUTTON");
+            button.className = "list-group-item";
+            button.id = username;
+            button.value = username;
+            button.type = "button";
+            text = document.createTextNode(name);
+            button.appendChild(text);
+            $('#user-list').append(button);
+        }
+        
+        
+    </script>
   </body>
 </html>
+
+

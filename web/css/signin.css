@@ -1,7 +1,24 @@
 body {
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #eee;
+  background-color: #FAF7F5;
+  
+
+}
+#logincont{
+    width: 670px;
+    height: 360px;
+    border: 2px solid #00b0b3;
+    background: #00b0b3;
+    border-radius: 5px;
+    margin-left: 350px;
+    margin-right: 250px;
+    margin-top: 140px;
+    margin-bottom: 0px;
+}
+.form-signin-heading{
+    
+    color:white;
 }
 
 .form-signin {

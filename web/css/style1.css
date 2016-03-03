@@ -31,12 +31,23 @@ body {
 
 }
 
+
 #search{
     width:200px;
     
 }
 #logo{
-    margin-bottom:29px;
+    margin-bottom:0px;
+    margin-top: 0px;
+    width:200px;
+    height: 80px;
+    padding-top: 0px;
+    padding-bottom: 0px;
+}
+li h3{
+     
+    margin-left: 5px;
+    margin-right: 200px;
 }
 #users{
 background:#FAF7F5;
@@ -48,9 +59,14 @@ ul li{
    
 }
 li a{
-    margin-left:5px;
-    margin-right:5px;
+    margin-left:100px;
+    margin-right:0px;
     background:lightskyblue;
+    padding:0px;
+}
+li form{
+    margin-left: 0px;
+    margin-right: 0px;
     padding:0px;
 }
 .navbar navbar-inverse{
@@ -79,7 +95,7 @@ li fo{
     
 }
 #buton{
-   margin-left: 200px; 
+   margin-left: 15px; 
    background-color: #00b0b3;
    padding:2px;
    border: 0px #00b0b3;
