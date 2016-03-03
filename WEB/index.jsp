@@ -49,7 +49,7 @@
       
     <div class="container">
 
-      <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()">
+      <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()" method="POST">
         <h2 class="form-signin-heading">Please sign in</h2>
         
         <label for="username" class="sr-only">Username</label>
