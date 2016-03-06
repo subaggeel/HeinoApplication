@@ -11,10 +11,10 @@ import java.util.TreeMap;
  */
 public class UserStore {
 
-    private static final UserStore INSTANCE = new UserStore();
-    private final TreeMap users;
+    public static final UserStore INSTANCE = new UserStore();
+    static TreeMap users;
 
-    private UserStore() {
+    public UserStore() {
         //users = new ArrayList<>();
         users = new TreeMap<>();
         this.init();
@@ -33,7 +33,6 @@ public class UserStore {
         users.put("pauliina", new User("pauliina", "123", "Pauliina", "Parkkinen"));
         users.put("abdi", new User("abdi", "123", "Mohammed", "Cabdi"));
         users.put("minhvo", new User("minhvo", "123", "Minh Hoang", "VO"));
-
 //		try {
 //			FileOutputStream out = new FileOutputStream("users.ser");
 //			ObjectOutputStream obout = new ObjectOutputStream(out);
@@ -134,6 +133,11 @@ public class UserStore {
 
     public void createUser(User user) {
         users.put(user.getUsername(), user);
+    }
+    
+    public boolean isAvailable(String username) {
+        User usr = (User) users.get(username); //username as key
+        return usr == null;
     }
 
 }

@@ -72,8 +72,8 @@
             </div>
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        
-      </form>
+      </form><br>
+      <a href="register.jsp"><h3>If you have not Creating an account yet, please Sign Up! </h3></a>
 
     </div> <!-- /container -->
 
