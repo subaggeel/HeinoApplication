@@ -61,6 +61,18 @@
                 websocket.onclose = function () {};
                 websocket.close()
             };
+            
+            $(document).ready(function() {
+           $('#demo1').hide();
+           $("#togbut").click.show();
+    
+        });
+           
+         });
+         
+         
+
+
 
 
 
@@ -93,14 +105,19 @@
                             <span class="icon-bar"></span>
                         </button>
                         <a class="navbar-brand" href="#" id="logo">
-                            <img src="images/hospital-logo-hi.png" alt="" height="40" width="50">
+                            <img src="images/img6.jpg" alt="logo" height="90" width="150">
                         </a>
+                         
                     </div>
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <ul class="nav navbar-nav navbar-right">
                             <li>
-                                <a href="#"><i class="fa fa-cog" style="color:white">My Account</i></a>
+                                <h3 style="color:whitesmoke">Welcome <%=userName%> !</h3>
+                                <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
+                            </li>
+                            <li>
+                                <a data-toggle="collapse" href="#collapse1"><i class="fa fa-cog" style="color:white">My Account</i></a>
                             </li>
                             <li>
                                 <form id="myform" action="<%=response.encodeURL("LogoutServlet")%>" method="post">
@@ -109,10 +126,7 @@
 
                                 </form>
                             </li>
-                            <li>
-                                <h3 style="color:whitesmoke">Welcome <%=userName%> !</h3>
-                                <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
-                            </li>
+                           
                         </ul>
                     </div>
                     <!-- /.navbar-collapse -->
@@ -180,33 +194,35 @@
                                     <button class="btn btn-info" type="button" onclick="sendMessage();">SEND</button>
                                 </span>
                             </div>
-                            <div class="btn-group">
-                                     <a class="btn btn-default" href="#"><i class="fa fa-camera"></i></a>
-                                     <a class="btn btn-default" id="question" href="#"><i class="fa fa-smile-o"></i></a>
-                                     <a class="btn btn-default" href="#"><i class="fa fa-thumbs-o-up"></i></a>
-                                     <a class="btn btn-default" href="#"><i class="fa fa-align-justify"></i></a>
-                                   </div>
+                            
                         </div>
 
                     </div>
                 
                 <div class="col-lg-4 col-md-4 col-sm-4" id="demo1">
                      
-                    <div class="chat-box-new-div">
+                    <div class="chat-box-new-div" id="collapse1" class="panel-collapse collapse">
                         <div class="chat-box-new-head">
                             DETAILS
                         </div>
-                        <div class="panel-body chat-box-new" id="chat" >
-
-                            
-                            
-                        </div>
-                        <div>
+                        <div class="panel-group">
+                          <div class="panel panel-default">
+                              
+                                <div >
+                                        <div class="panel-body">
+                                            <img src="images/img5.jpg" alt="img1">
+                                    </div>
+                                <div class="panel-footer"><%=userName%></div>
+                                 </div>
+                                   </div>
+                                  </div>
+                        
+                        
                          
 
                     </div>
                 
-            </div>
+           
 
                 </div>
                 
