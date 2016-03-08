@@ -11,14 +11,20 @@
 <html>
     <head>
         <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="" />
-        <meta name="author" content="" />
+        <meta name="Mohamed Abdi" content="" />
         <!--[if IE]>
             <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
             <![endif]-->
         <title>ChatApp</title>
         <!-- BOOTSTRAP CORE STYLE CSS -->
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.theme.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.theme.min.css" type="text/css">
+        <link rel="stylesheet" href="css/jquery-ui.structure.css" type="text/css">
+
         <link href="css/bootstrap.css" rel="stylesheet" />
         <!-- Bootstrap core CSS -->
         <link href="css/bootstrap.min.css" rel="stylesheet">
@@ -28,12 +34,19 @@
         <!-- CUSTOM STYLE CSS -->
         <link href="css/style1.css" rel="stylesheet" />
 
-        <link href="css/mainstyle.css" rel="stylesheet" />
+       
         <!-- jQuery library -->
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
 
         <!-- Latest compiled JavaScript -->
         <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.js"></script>
+        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.4/jquery-ui.min.js"></script>
+
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.0/jquery.min.js"></script>
+        <script type="text/javascript" src="js/jquery.ui.accordion.js"></script>
+
+
         <script type="text/javascript">
             var websocket = new WebSocket("ws://localhost:8080/ChatApplication/chatroomServerEndpoint/${roomName}");
             websocket.onmessage = function processMessage(message) {
@@ -51,7 +64,7 @@
             }
 
             function sendMessage() {
-                if(messageText.value != "") {
+                if (messageText.value != "") {
                     websocket.send(messageText.value);
                     messageText.value = "";
                 }
@@ -61,26 +74,16 @@
                 websocket.onclose = function () {};
                 websocket.close()
             };
-            
-            $(document).ready(function() {
-           $('#demo1').hide();
-           $("#togbut").click.show();
-    
-        });
-           
-         });
-         
-         
-
 
 
 
 
         </script>
+
     </head>
-    <body onload="add()">
+    <body onload="add();">
         <%
-        //Check that session exists for user!
+            //Check that session exists for user!
             String userName = null;
             if (session.getAttribute("user") == null) {
                 response.sendRedirect("index.html");
@@ -92,53 +95,40 @@
         %>
 
 
-        <div class="container-fluid">
 
-            <nav class="navbar navbar-inverse" role="navigation" id="nav" >
-                <div class="container" id="nav" >
-                    <!-- Brand and toggle get grouped for better mobile display -->
-                    <div class="navbar-header">
-                        <button type="button" class="navbar-toggle-pull-right" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" id="buton">
-                            <span class="fa fa-align-left"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </button>
-                        <a class="navbar-brand" href="#" id="logo">
-                            <img src="images/img6.jpg" alt="logo" height="90" width="150">
-                        </a>
-                         
-                    </div>
-                    <!-- Collect the nav links, forms, and other content for toggling -->
-                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                        <ul class="nav navbar-nav navbar-right">
-                            <li>
-                                <h3 style="color:whitesmoke">Welcome <%=userName%> !</h3>
-                                <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
-                            </li>
-                            <li>
-                                <a data-toggle="collapse" href="#collapse1"><i class="fa fa-cog" style="color:white">My Account</i></a>
-                            </li>
-                            <li>
-                                <form id="myform" action="<%=response.encodeURL("LogoutServlet")%>" method="post">
 
-                                    <button class="btn btn-info btn-logout" type="submit" value="Logout" id="logoutbut" ><i class="fa fa-log-ou" style="color:white" >LogOut</i></button> 
 
-                                </form>
-                            </li>
-                           
-                        </ul>
-                    </div>
-                    <!-- /.navbar-collapse -->
+        <nav class="navbar navbar-default" id="nav">
+            <div class="container-fluid">   
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="#">Chat Application</a>
                 </div>
-                <!-- /.container -->
-            </nav>
+                <ul class="nav navbar-nav pull-right">
 
-            <div class="row pad-top pad-bottom">
+                    <li>
+                        <h3 style="color:whitesmoke">Welcome <%=userName%> !</h3>
+                        <h3 style="color:whitesmoke">Welcome to ${roomName} !</h3>
+
+                    </li>
+                    <li id="myacount"><a href="#"><i class="fa fa-cog" style="color:white">My Account</i></a></li>
+                    <li>
+                        
+
+                            <li ><a href="#" onclick="document.getElementById('myform').submit()"><i class="fa fa-sign-out" style="color:white">Log out</i></a></li>
+
+                        
+                    </li>
+                </ul>
+            </div>
+        </nav>
+
+        <div class="container-fluid">
+            <form id="myform" action="<%=response.encodeURL("LogoutServlet")%>" method="post"></form>
+            <div class="row pad-top pad-bottom"  >
 
 
 
-                <div class="col-lg-3 col-md-3 col-sm-3">
+                <div class= "col-xs-12 col-sm-6 col-md-4" id="infolist">
                     <div class="chat-box-online-div">
                         <div class="chat-box-online-head">
 
@@ -158,7 +148,7 @@
                             <hr class="hr-clas-low">
 
 
-                            <textarea class="chat-box-online-left" readonly="readonly" id="usersTextArea">
+                            <textarea class="chat-box-online-left" readonly="readonly" style="width:100%"id="usersTextArea">
 
                             </textarea>
                             <hr class="hr-clas-low" />
@@ -175,7 +165,8 @@
 
                 </div>
 
-                <div class=" col-lg-4 col-md-4 col-sm-4" id="demo">
+
+                <div class=" col-xs-12 col-sm-6 col-md-4" id="demo">
                     <div class="chat-box-div">
                         <div class="chat-box-head">
                             GROUP CHAT HISTORY
@@ -183,7 +174,7 @@
                         </div><!-- Tänne tulee viestit-->
                         <!--                        <div class="panel-body chat-box-main" id="messageTextArea" ></div>-->
 
-                        <textArea id="messagesTextArea" readonly="readonly" rows="10" cols="59"> </textArea>
+                        <textArea id="messagesTextArea" readonly="readonly" style="width:100%"> </textArea>
                         </div><!-- Tänne tulee viestit-->
                         <div class="chat-box-footer">
                             <div class="input-group">
@@ -199,36 +190,32 @@
 
                     </div>
                 
-                <div class="col-lg-4 col-md-4 col-sm-4" id="demo1">
+                      
+                
+                <div class="col-xs-12 col-sm-6 col-md-4" id="demo1">
                      
-                    <div class="chat-box-new-div" id="collapse1" class="panel-collapse collapse">
+                    <div class="chat-box-new-div">
                         <div class="chat-box-new-head">
                             DETAILS
                         </div>
-                        <div class="panel-group">
-                          <div class="panel panel-default">
-                              
-                                <div >
-                                        <div class="panel-body">
-                                            <img src="images/img5.jpg" alt="img1">
-                                    </div>
-                                <div class="panel-footer"><%=userName%></div>
-                                 </div>
-                                   </div>
-                                  </div>
-                        
-                        
+                        <div class="panel-body chat-box-new" id="chat" >
+
+                            
+                            
+                        </div>
+                        <div>
                          
 
                     </div>
                 
-           
+            </div>
 
                 </div>
                 
         </div>
+        </div>
         
-        <input type="hidden" id="current-user" type="text" visibility="hidden" value="<%= session.getAttribute("username") %>"/>
+        <input type="hidden" id="current-user" type="text" visibility="hidden" value="<%= session.getAttribute("username")%>"/>
         
         <!-- USING SCRIPTS BELOW TO REDUCE THE LOAD TIME -->
         <!-- CORE JQUERY SCRIPTS FILE -->
@@ -239,78 +226,56 @@
     <script type="text/javascript">$('messagesTextArea').emojiarea();</script>
 
         <script>
-//            function pres() {
-//
-//                var a = document.getElementById("in").innerHTML;
-//                var b = document.getElementById("chat");
-//                var c = a.value;
-//
-//                b.innerHTML = a;
-//
-//
-//            }
-//
-//            function pres1() {
-//
-//                var user = document.getElementById('usersTextArea').value;
-//                var a = document.getElementById("users").innerHTML;
-//                var b = document.getElementById("chat");
-//                var c = a.value;
-//
-//                b.innerHTML = a + user;
-//
-//
-//            }
-//
-//            function pres3() {
-//
-//                var a = document.getElementById("us").innerHTML;
-//                var b = document.getElementById("chat");
-//                var c = a.value;
-//
-//                b.innerHTML = a;
-//
-//
-//            }
-
-            function makeUL(array) {
-                // Create the list element:
-                var list = document.createElement('ul');
-
-                for (var i = 0; i < array.length; i++) {
-                    // Create the list item:
-                    var item = document.createElement('li');
-
-                    // Set its contents:
-                    item.appendChild(document.createTextNode(array[i]));
-
-                    // Add it to the list:
-                    list.appendChild(item);
-                }
-
-                // Finally, return the constructed list:
-                return list;
-            }
-
-            function set_body_width() { // set body height = window height
-                var wh = $(window).width();
-                $(".imgFitWindowResize").width(wh);
-            }
-            $(document).ready(function () {
-                set_body_width();
-                $(window).bind('resize', function () {
-                    set_body_width();
-                });
-            });
+                //            function pres() {
+                //
+                //                var a = document.getElementById("in").innerHTML;
+                //                var b = document.getElementById("chat");
+                //                var c = a.value;
+                //
+                //                b.innerHTML = a;
+                //
+                //
+                //            }
+                //
+                //            function pres1() {
+                //
+                //                var user = document.getElementById('usersTextArea').value;
+                //                var a = document.getElementById("users").innerHTML;
+                //                var b = document.getElementById("chat");
+                //                var c = a.value;
+                //
+                //                b.innerHTML = a + user;
+                //
+                //
+                //            }
+                //
+                //            function pres3() {
+                //
+                //                var a = document.getElementById("us").innerHTML;
+                //                var b = document.getElementById("chat");
+                //                var c = a.value;
+                //
+                //                b.innerHTML = a;
+                //
+                //
+                //            }
 
 
 
 
 
 
+                
 
-            </script>
+                    
+               
+
+
+
+
+
+
+                                                </script>
     </body>
 
 </html>
-

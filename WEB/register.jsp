@@ -24,6 +24,7 @@
 
     <!-- Custom styles for this template -->
     <link href="css/signin.css" rel="stylesheet">
+    <link href="css/register.css" rel="stylesheet">
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
@@ -38,12 +39,12 @@
 
   <body>
       
-    <div class="container" id="logincont">
+    <div class="container" id="cont">
 
         <form id="register-form" class="register-form" action="http://localhost:8080/ChatApplication/RegisterSerlvet" method="POST">
-            <h2 class="form-signin-heading">Please fill in your Personal Details</h2>
+            <h2 class="form-signin-heading" style="color:whitesmoke">Please fill in your Personal Details</h2>
 
-            <label for="username" class="sr-only">Username</label>
+            <label for="username" class="sr-only" >Username</label>
             <input type="username" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
 
             <label for="password" class="sr-only">Password</label>
@@ -58,7 +59,7 @@
             <button class="btn btn-lg btn-primary btn-block" type="submit">Register</button>
         
         </form>
-        <a href="index.jsp"><h3>If you have already Created an account, please Sign In! </h3></a>
+        <a href="index.jsp" id="signinlink"><h3 style="color:whitesmoke">If you have already Created an account, please Sign In! </h3></a>
 
     </div> <!-- /container -->
 

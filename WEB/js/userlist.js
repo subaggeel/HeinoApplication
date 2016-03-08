@@ -32,6 +32,7 @@ $(document).ready(function () {
         if (username != currentUser) {
             var button;
             var text;
+           
             button = document.createElement("BUTTON");
             button.className = "list-group-item";
             button.id = username;

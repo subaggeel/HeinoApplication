@@ -1,35 +1,44 @@
 body {
+    width: 100%;
   padding-top: 40px;
   padding-bottom: 40px;
-  background-color: #FAF7F5;
-  
-
-}
-#logincont{
-    width: 670px;
-    height: 360px;
-    border: 2px solid #00b0b3;
-    background: #00b0b3;
-    border-radius: 5px;
-    margin-left: 350px;
-    margin-right: 250px;
-    margin-top: 140px;
-    margin-bottom: 0px;
-}
-.form-signin-heading{
-    
-    color:white;
+  background:#323231;
 }
 
 .form-signin {
-  max-width: 330px;
+  
+  display:block;
+  border:2px solid #00b0b3;
+  background:#00b0b3;
+  border-radius: 5px;
+  max-width: 400px;
   padding: 15px;
   margin: 0 auto;
+  margin-top: 150px;
+}
+#signinlink:hover{
+    display:block;
+    background: #0E63B2;
+    padding:3px;
+    margin-top: 4px;
+    border-radius: 5px;
+    
 }
 .form-signin .form-signin-heading,
 .form-signin .checkbox {
   margin-bottom: 10px;
+  color:whitesmoke;
+  text-align: center;
+ 
 }
+ label{
+    
+    color:whitesmoke;
+}
+#signupbtn{
+
+        margin-top:10px;
+    }
 .form-signin .checkbox {
   font-weight: normal;
 }
