@@ -27,7 +27,7 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/js/ie-emulation-modes-warning.js"></script>
+    <!--    <script src="/js/ie-emulation-modes-warning.js"></script>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -72,8 +72,9 @@
             </div>
         
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
-        <a href="register.jsp"><button class="btn btn-lg btn-primary btn-block" id="signupbtn">Sign up here</button></a>
+        
       </form><br>
+        <a href="register.jsp"><button class="btn btn-lg btn-primary btn-block" id="signupbtn">Sign up here</button></a>
       
 
     </div> <!-- /container -->

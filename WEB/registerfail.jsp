@@ -27,7 +27,7 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/js/ie-emulation-modes-warning.js"></script>
+<!--    <script src="/js/ie-emulation-modes-warning.js"></script>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -39,10 +39,9 @@
   <body>
       
     <div class="container" id="logincont">
-        <h2> Your username has been used. Please try again!</h2>
 
         <form id="register-form" class="register-form" action="http://localhost:8080/ChatApplication/RegisterSerlvet" method="POST">
-            <h2 class="form-signin-heading">Please fill in your Personal Details</h2>
+            <h2 class="form-signin-heading" style="color:whitesmoke">Your username has been used. Please try again!</h2>
 
             <label for="username" class="sr-only">Username</label>
             <input type="username" name="username" id="username" class="form-control" placeholder="Username" required autofocus>

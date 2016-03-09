@@ -225,57 +225,6 @@
     <script src="js/userlist.js" type="text/javascript"></script>
     <script type="text/javascript">$('messagesTextArea').emojiarea();</script>
 
-        <script>
-                //            function pres() {
-                //
-                //                var a = document.getElementById("in").innerHTML;
-                //                var b = document.getElementById("chat");
-                //                var c = a.value;
-                //
-                //                b.innerHTML = a;
-                //
-                //
-                //            }
-                //
-                //            function pres1() {
-                //
-                //                var user = document.getElementById('usersTextArea').value;
-                //                var a = document.getElementById("users").innerHTML;
-                //                var b = document.getElementById("chat");
-                //                var c = a.value;
-                //
-                //                b.innerHTML = a + user;
-                //
-                //
-                //            }
-                //
-                //            function pres3() {
-                //
-                //                var a = document.getElementById("us").innerHTML;
-                //                var b = document.getElementById("chat");
-                //                var c = a.value;
-                //
-                //                b.innerHTML = a;
-                //
-                //
-                //            }
-
-
-
-
-
-
-                
-
-                    
-               
-
-
-
-
-
-
-                                                </script>
     </body>
 
 </html>

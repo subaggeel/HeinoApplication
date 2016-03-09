@@ -27,7 +27,7 @@
 
     <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
     <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-    <script src="/js/ie-emulation-modes-warning.js"></script>
+<!--    <script src="/js/ie-emulation-modes-warning.js"></script>-->
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -48,10 +48,9 @@
   <body>
       
     <div class="container" id="logincont">
-        <h2>Your username and password are invalid. Please Log In Again</h2>
 
       <form class="form-signin" action="http://localhost:8080/ChatApplication/UserNameServlet" onchange="handleNewRoom()" method="POST">
-        <h2 class="form-signin-heading">Please sign in</h2>
+        <h2 class="form-signin-heading">Your username and password are invalid. Please Log In Again</h2>
         
         <label for="username" class="sr-only">Username</label>
         <input type="username" name="username" id="username" class="form-control" placeholder="Username" required autofocus>
@@ -75,7 +74,7 @@
         <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
         
       </form>
-        <a href="register.jsp"><h3>If you have not Creating an account yet, please Sign Up! </h3></a>
+        <a href="register.jsp"><button class="btn btn-lg btn-primary btn-block" id="signupbtn">Sign up here</button></a>
 
     </div> <!-- /container -->
 
